@@ -3,13 +3,17 @@ const assert = require("assert");
 const User = require("../src/user");
 
 describe("Creating records", () => {
-  it("saves a user.", () => {
+  it("saves a user.", (done) => {
     // from mongoose docs : Model constructor.
     // Provides the interface to MongoDB collections as
     // well as creates document instances.
     const joe = new User({ name: "Joe" });
 
-    // Save the document to database
-    joe.save();
-  });
+    // Save the documASent to database
+    joe.save().then(() => { 
+      // has jow been saved correctly
+      assert(!joe.isNew);
+      done();
+    });
+  }); 
 });
